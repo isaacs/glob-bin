@@ -6,7 +6,9 @@
   "files": [
     "dist"
   ],
-  "bin": "./dist/esm/bin.mjs",
+  "bin": {
+    "glob-bin": "dist/esm/bin.mjs"
+  },
   "license": "BlueOak-1.0.0",
   "scripts": {
     "preversion": "npm test",
@@ -34,7 +36,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/isaacs/glob-bin"
+    "url": "git+https://github.com/isaacs/glob-bin.git"
   },
   "type": "module",
   "tshy": {
