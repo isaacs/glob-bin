@@ -121,6 +121,45 @@ t.test('finds matches for a pattern', async t => {
   )
 })
 
+t.test('append positional args safely to shell in bash', async t => {
+  const cwd = t.testdir({
+    a: {
+      'x.y': '',
+      'x.a': '',
+      b: {
+        'z.y': '',
+        'z.a': '',
+      },
+    },
+  })
+  const { SHELL } = process.env
+  t.teardown(() => (process.env.SHELL = SHELL))
+  process.env.SHELL = '/usr/local/bin/bash'
+  const p = expectForegroundChild()
+  t.chdir(cwd)
+  const c = `node -p "process.argv.map(s=>s.toUpperCase())"`
+  t.intercept(process, 'argv', {
+    value: [process.argv[0], 'glob', '**/*.y', '-c', c],
+  })
+
+  await t.mockImport('../dist/esm/bin.mjs', {
+    'foreground-child': mockForegroundChild,
+  })
+  await p
+  t.strictSame(foregroundChildCalls, [
+    [
+      '/usr/local/bin/bash',
+      [
+        '-c',
+        'node -p "process.argv.map(s=>s.toUpperCase())" "$@"',
+        '/usr/local/bin/bash',
+        'a/x.y',
+        'a/b/z.y',
+      ],
+    ],
+  ])
+})
+
 t.test('append positional args safely to shell in fish', async t => {
   const cwd = t.testdir({
     a: {
