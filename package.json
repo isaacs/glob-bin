@@ -1,0 +1,58 @@
+{
+  "name": "glob-bin",
+  "version": "0.0.0-0",
+  "description": "the command line bin script that used to be in node-glob",
+  "author": "Isaac Z. Schlueter <i@izs.me> (https://blog.izs.me)",
+  "files": [
+    "dist"
+  ],
+  "bin": "./dist/esm/bin.mjs",
+  "license": "BlueOak-1.0.0",
+  "scripts": {
+    "preversion": "npm test",
+    "postversion": "npm publish",
+    "prepublishOnly": "git push origin --follow-tags",
+    "prepare": "tshy",
+    "pretest": "npm run prepare",
+    "presnap": "npm run prepare",
+    "test": "tap",
+    "snap": "tap",
+    "format": "prettier --write . --log-level warn",
+    "typedoc": "typedoc --tsconfig .tshy/esm.json ./src/*.ts"
+  },
+  "devDependencies": {
+    "prettier": "^3.6.2",
+    "tap": "^21.1.3",
+    "tshy": "^3.1.0",
+    "typedoc": "^0.28.14"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "funding": {
+    "url": "https://github.com/sponsors/isaacs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/isaacs/glob-bin"
+  },
+  "type": "module",
+  "tshy": {
+    "selfLink": false,
+    "dialects": [
+      "esm"
+    ],
+    "exports": {
+      "./package.json": "./package.json"
+    }
+  },
+  "exports": {
+    "./package.json": "./package.json"
+  },
+  "dependencies": {
+    "foreground-child": "^3.3.1",
+    "glob": "^12.0.0",
+    "jackspeak": "^4.1.1",
+    "package-json-from-dist": "^1.0.1"
+  }
+}
