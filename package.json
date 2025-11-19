@@ -20,7 +20,7 @@
     "test": "tap",
     "snap": "tap",
     "format": "prettier --write . --log-level warn",
-    "typedoc": "typedoc --tsconfig .tshy/esm.json ./src/*.ts"
+    "typedoc": "typedoc"
   },
   "devDependencies": {
     "prettier": "^3.6.2",
