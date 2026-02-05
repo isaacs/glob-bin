@@ -1,9 +1,9 @@
 #!/usr/bin/env node
 import { foregroundChild } from 'foreground-child'
-import { existsSync } from 'fs'
+import { existsSync } from 'node:fs'
 import { jack } from 'jackspeak/min'
 import { loadPackageJson } from 'package-json-from-dist'
-import { basename, join } from 'path'
+import { basename, join } from 'node:path'
 import { globStream } from 'glob'
 import globPkg from 'glob/package.json' with { type: 'json' }
 
