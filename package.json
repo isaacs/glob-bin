@@ -7,7 +7,8 @@
     "dist"
   ],
   "bin": {
-    "glob-bin": "dist/esm/bin-min.mjs"
+    "glob-bin": "dist/esm/bin-min.mjs",
+    "glob": "dist/esm/bin-min.mjs"
   },
   "license": "BlueOak-1.0.0",
   "scripts": {
