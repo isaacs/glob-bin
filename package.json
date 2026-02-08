@@ -1,6 +1,6 @@
 {
   "name": "glob-bin",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "description": "the command line bin script that used to be in node-glob",
   "author": "Isaac Z. Schlueter <i@izs.me> (https://blog.izs.me)",
   "files": [
