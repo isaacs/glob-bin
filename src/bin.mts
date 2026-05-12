@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// oxlint-disable no-console
 import { foregroundChild } from 'foreground-child'
 import { existsSync } from 'node:fs'
 import { jack } from 'jackspeak/min'
@@ -316,7 +317,9 @@ try {
     process.exit(0)
   }
   //const { shell, help } = values
-  if (positionals.length === 0 && !def) throw 'No patterns provided'
+  if (positionals.length === 0 && !def) {
+    throw 'No patterns provided'
+  }
   if (positionals.length === 0 && def) positionals.push(def)
   const patterns =
     all ? positionals : positionals.filter(p => !existsSync(p))
@@ -383,7 +386,7 @@ try {
     }
   }
 } catch (e) {
-  console.error(j.usage())
-  console.error(e instanceof Error ? e.message : String(e))
+  const msg = `${j.usage()}\n${e instanceof Error ? e.message : String(e)}`
+  console.error(msg)
   process.exit(1)
 }

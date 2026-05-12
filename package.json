@@ -15,20 +15,26 @@
     "preversion": "npm test",
     "postversion": "npm publish",
     "prepublishOnly": "git push origin --follow-tags",
-    "prepare": "tshy && bash build.sh",
+    "prepare": "tshy && bash scripts/build.sh",
     "pretest": "npm run prepare",
     "presnap": "npm run prepare",
     "test": "tap",
     "snap": "tap",
     "format": "prettier --write . --log-level warn",
-    "typedoc": "typedoc"
+    "typedoc": "typedoc",
+    "lint": "oxlint --fix src test",
+    "postsnap": "npm run lint",
+    "postlint": "npm run format"
   },
   "devDependencies": {
-    "esbuild": "^0.27.2",
-    "prettier": "^3.6.2",
-    "tap": "^21.1.3",
-    "tshy": "^3.1.1",
-    "typedoc": "^0.28.14"
+    "@types/node": "^25.7.0",
+    "esbuild": "^0.28.0",
+    "oxlint": "^1.64.0",
+    "oxlint-tsgolint": "^0.22.1",
+    "prettier": "^3.8.3",
+    "tap": "^21.7.2",
+    "tshy": "^4.1.2",
+    "typedoc": "^0.28.19"
   },
   "engines": {
     "node": ">=20"

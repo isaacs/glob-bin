@@ -9,9 +9,11 @@ const { version: cliVersion } = JSON.parse(
     'utf8',
   ),
 )
+
 const {
   default: { version: libVersion },
 } = await import('glob/package.json', { with: { type: 'json' } })
+
 const bin = fileURLToPath(new URL('../dist/esm/bin.mjs', import.meta.url))
 
 const foregroundChildCalls: [string, string[]][] = []
@@ -52,6 +54,7 @@ interface Result {
   code: number | null
   signal: NodeJS.Signals | null
 }
+
 const run = async (args: string[], options = {}) => {
   const proc = spawn(
     process.execPath,
@@ -62,8 +65,11 @@ const run = async (args: string[], options = {}) => {
   const err: Buffer[] = []
   proc.stdout.on('data', c => out.push(c))
   proc.stderr.on('data', c => err.push(c))
+  const outend = new Promise(res => proc.stdout.on('end', res))
+  const errend = new Promise(res => proc.stdout.on('end', res))
   return new Promise<Result>(res => {
-    proc.on('close', (code, signal) => {
+    proc.on('close', async (code, signal) => {
+      await Promise.all([outend, errend])
       res({
         args,
         options,
